@@ -1,0 +1,1756 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Quick Initiative Pro v1.3 — Dark Gold Elegant (Lord of Mysteries Edition)
+   Cores e tipografia harmonizados com o sistema Lord
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+    --qi-bg        : #06060e;
+    --qi-surface   : #0d0d1c;
+    --qi-card      : #111122;
+    --qi-card-alt  : #0f0f1e;
+    --qi-hbg       : #080814;
+    --qi-gold      : #c8922a;
+    --qi-gold-lt   : #e8b84a;
+    --qi-gold-dk   : #7a5010;
+    --qi-gold-faint: rgba(200,146,42,.07);
+    --qi-gold-glow : rgba(200,146,42,.32);
+    --qi-text      : #cfc8bc;
+    --qi-text-head : #e8d090;
+    --qi-text-muted: #6a6258;
+    --qi-text-dim  : #3a3430;
+    --qi-border    : #1e1e30;
+    --qi-border-gd : #3a2810;
+    --qi-villain   : #c04040;
+    --qi-villain-lt: #f07070;
+    --qi-hero      : #4080c8;
+    --qi-hero-lt   : #70b0f0;
+    --qi-r         : 6px;
+    --qi-r-lg      : 10px;
+}
+
+/* ── App window ──────────────────────────────────────────────────────── */
+.qi-app {
+    font-family  : 'Lato', sans-serif !important;
+    background   : var(--qi-surface) !important;
+    color        : var(--qi-text) !important;
+    border       : 1px solid var(--qi-gold) !important;
+    box-shadow   : 0 0 40px var(--qi-gold-glow),
+                   0 0 80px rgba(0,0,0,.9) !important;
+    border-radius: var(--qi-r-lg) !important;
+}
+.qi-app .window-header {
+    background   : linear-gradient(180deg, #1a1408 0%, var(--qi-hbg) 100%) !important;
+    border-bottom: 1px solid var(--qi-gold) !important;
+    border-radius: 9px 9px 0 0 !important;
+}
+.qi-app .window-header .window-title {
+    font-family   : 'Cinzel', serif !important;
+    color         : var(--qi-gold-lt) !important;
+    font-weight   : 700 !important;
+    font-size     : 13px !important;
+    letter-spacing: 1px !important;
+    text-shadow   : 0 0 14px var(--qi-gold-glow) !important;
+}
+.qi-app .window-header a.header-button       { color:var(--qi-text-muted) !important; }
+.qi-app .window-header a.header-button:hover { color:var(--qi-gold-lt)    !important; }
+.qi-app .window-content {
+    background     : var(--qi-surface) !important;
+    padding        : 18px !important;
+    border-radius  : 0 0 9px 9px !important;
+    background-image: radial-gradient(ellipse at 50% 0%,
+        rgba(200,146,42,.04) 0%, transparent 65%) !important;
+    display        : flex !important;
+    flex-direction : column !important;
+    overflow       : hidden !important;
+    height         : calc(100% - 32px) !important; /* desconta header */
+    box-sizing     : border-box !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   SETUP
+   ════════════════════════════════════════════════════════════════════════ */
+.qi-setup { display:flex; flex-direction:column; gap:16px; flex:1; min-height:0; }
+
+.qi-sect-label {
+    font-family   : 'Cinzel', serif;
+    font-size     : 10px;
+    font-weight   : 700;
+    color         : var(--qi-gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-bottom : 1px solid rgba(200,146,42,.2);
+    padding-bottom: 7px;
+    text-shadow   : 0 0 8px var(--qi-gold-glow);
+}
+
+/* ── Selector de sistema — barra compacta ── */
+.qi-sys-bar {
+    display    : flex;
+    align-items: flex-end;
+    gap        : 10px;
+}
+
+.qi-sys-select-wrap,
+.qi-sys-generic-wrap {
+    display       : flex;
+    flex-direction: column;
+    gap           : 5px;
+}
+
+.qi-sys-select-wrap { flex: 1; }
+
+.qi-sys-select-label {
+    font-family   : 'Cinzel', serif;
+    font-size     : 9px;
+    font-weight   : 700;
+    color         : var(--qi-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow   : 0 0 6px var(--qi-gold-glow);
+}
+
+.qi-sys-select {
+    /* mantido para compatibilidade mas não usado */
+    display: none;
+}
+
+/* ── Custom dropdown de sistema ── */
+.qi-sys-dropdown {
+    position     : relative;
+    width        : 100%;
+    user-select  : none;
+    cursor       : pointer;
+}
+
+.qi-sys-trigger {
+    display      : flex;
+    align-items  : center;
+    gap          : 10px;
+    padding      : 9px 12px;
+    background   : var(--qi-card) !important;
+    border       : 1px solid var(--qi-gold) !important;
+    border-radius: var(--qi-r);
+    transition   : border-color .18s, box-shadow .18s;
+    min-height   : 42px;
+}
+
+.qi-sys-dropdown.open .qi-sys-trigger,
+.qi-sys-trigger:hover {
+    border-color: var(--qi-gold-lt) !important;
+    box-shadow  : 0 0 0 2px rgba(200,146,42,.18) !important;
+}
+
+.qi-sys-trigger-icon {
+    font-size  : 18px;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+.qi-sys-trigger-lbl {
+    flex       : 1;
+    font-family: 'Lato', sans-serif;
+    font-size  : 13px;
+    font-weight: 700;
+    color      : var(--qi-gold-lt);
+    white-space: nowrap;
+    overflow   : hidden;
+    text-overflow: ellipsis;
+}
+
+.qi-sys-chev {
+    font-size : 11px;
+    color     : var(--qi-gold);
+    transition: transform .2s;
+    flex-shrink: 0;
+}
+
+.qi-sys-dropdown.open .qi-sys-chev { transform: rotate(180deg); }
+
+.qi-sys-panel {
+    display      : none;
+    position     : absolute;
+    top          : calc(100% + 3px);
+    left         : 0; right: 0;
+    z-index      : 99999;
+    background   : var(--qi-card);
+    border       : 1px solid var(--qi-gold);
+    border-radius: var(--qi-r);
+    box-shadow   : 0 8px 28px rgba(0,0,0,.8), 0 0 12px rgba(200,146,42,.15);
+    overflow     : hidden;
+}
+
+.qi-sys-dropdown.open .qi-sys-panel { display: block; }
+
+.qi-sys-item {
+    display    : flex;
+    align-items: center;
+    gap        : 10px;
+    padding    : 9px 14px;
+    cursor     : pointer;
+    transition : background .12s;
+    border-bottom: 1px solid rgba(200,146,42,.07);
+}
+.qi-sys-item:last-child { border-bottom: none; }
+
+.qi-sys-item-icon { font-size:16px; flex-shrink:0; line-height:1; }
+.qi-sys-item-lbl  { font-size:13px; font-weight:600; color:var(--qi-text); }
+
+.qi-sys-item:hover {
+    background: rgba(200,146,42,.08);
+}
+.qi-sys-item:hover .qi-sys-item-lbl { color: var(--qi-gold-lt); }
+
+.qi-sys-item.sel {
+    background: rgba(200,146,42,.12);
+}
+.qi-sys-item.sel .qi-sys-item-lbl {
+    color      : var(--qi-gold-lt);
+    font-weight: 700;
+}
+.qi-sys-item.sel::after {
+    content    : '◆';
+    margin-left: auto;
+    color      : var(--qi-gold);
+    font-size  : 9px;
+}
+
+
+
+/* Bloco genérico — hidden por padrão, mostra quando sistema=genérico */
+.qi-sys-generic-wrap {
+    width     : 120px;
+    flex-shrink: 0;
+    opacity   : 0;
+    pointer-events: none;
+    transition: opacity .2s;
+}
+
+.qi-sys-generic-wrap.visible {
+    opacity       : 1;
+    pointer-events: all;
+}
+
+.qi-generic-dice-input {
+    background   : var(--qi-card) !important;
+    color        : var(--qi-text-head) !important;
+    border       : 1px solid var(--qi-gold) !important;
+    border-radius: var(--qi-r);
+    padding      : 8px 10px;
+    font-size    : 13px;
+    font-family  : 'Lato', monospace;
+    text-align   : center;
+    width        : 100%;
+    box-sizing   : border-box;
+}
+
+.qi-generic-dice-input:focus {
+    outline   : none;
+    box-shadow: 0 0 0 2px rgba(200,146,42,.22) !important;
+}
+
+
+
+/* ── Arena de drag-and-drop ── */
+.qi-arena { display:grid; grid-template-columns:1fr 168px 1fr; gap:12px; min-height:220px; flex:1; min-height:0; }
+.qi-side-col { display:flex; flex-direction:column; height:100%; }
+
+.qi-col-title {
+    font-family   : 'Cinzel', serif;
+    font-size     : 11px;
+    font-weight   : 700;
+    margin-bottom : 8px;
+    text-align    : center;
+    padding       : 5px 4px;
+    border-radius : var(--qi-r);
+    color         : var(--qi-gold);
+    background    : var(--qi-gold-faint);
+    letter-spacing: .5px;
+}
+.villain-col .qi-col-title { color:var(--qi-villain-lt); background:rgba(192,64,64,.07); }
+.hero-col    .qi-col-title { color:var(--qi-gold-lt);    background:rgba(200,146,42,.07); }
+
+.qi-cnt {
+    background   : rgba(200,146,42,.6);
+    border-radius: 10px;
+    padding      : 1px 7px;
+    font-size    : 10px;
+    color        : #06060e;
+    margin-left  : 4px;
+    font-weight  : 900;
+}
+
+.qi-dropzone {
+    flex         : 1;
+    min-height   : 120px;
+    border       : 2px dashed var(--qi-border);
+    border-radius: var(--qi-r-lg);
+    padding      : 8px;
+    display      : flex;
+    flex-wrap    : wrap;
+    gap          : 8px;
+    align-content: flex-start;
+    transition   : all .18s;
+    background   : rgba(0,0,0,.12);
+    overflow-y   : auto;
+}
+.villain-col .qi-dropzone { border-color:rgba(192,64,64,.25); }
+.hero-col    .qi-dropzone { border-color:rgba(200,146,42,.25); }
+.qi-dropzone.hover {
+    border-color: var(--qi-gold) !important;
+    background  : var(--qi-gold-faint) !important;
+    box-shadow  : inset 0 0 20px rgba(200,146,42,.05);
+}
+.qi-drop-hint {
+    width     : 100%;
+    text-align: center;
+    color     : var(--qi-text-dim);
+    font-size : 11px;
+    padding   : 24px 8px;
+    font-style: italic;
+}
+
+.qi-center-col { display:flex; flex-direction:column; gap:8px; height:100%; min-height:0; }
+.qi-pool {
+    flex         : 1;
+    min-height   : 0;
+    max-height   : 100%;
+    border       : 1px solid var(--qi-border);
+    border-radius: var(--qi-r-lg);
+    padding      : 8px;
+    display      : flex;
+    flex-direction: column;
+    gap          : 6px;
+    overflow-y   : auto;
+    background   : rgba(0,0,0,.15);
+}
+.qi-pool::-webkit-scrollbar       { width:5px; }
+.qi-pool::-webkit-scrollbar-thumb { background:var(--qi-gold-dk); border-radius:3px; }
+.qi-pool::-webkit-scrollbar-track { background:rgba(0,0,0,.2); border-radius:3px; }
+.qi-pool.hover { border-color:var(--qi-gold); background:var(--qi-gold-faint); }
+.qi-empty {
+    color     : var(--qi-text-muted);
+    font-size : 11px;
+    text-align: center;
+    padding   : 12px 0;
+    margin    : 0;
+    font-style: italic;
+}
+
+.qi-refresh {
+    background   : var(--qi-card) !important;
+    color        : var(--qi-text-muted) !important;
+    border       : 1px solid var(--qi-border) !important;
+    border-radius: var(--qi-r);
+    padding      : 7px;
+    font-family  : 'Cinzel', serif;
+    font-size    : 10px;
+    font-weight  : 700;
+    letter-spacing: .5px;
+    cursor       : pointer;
+    transition   : all .18s;
+    text-transform: uppercase;
+}
+.qi-refresh:hover { border-color:var(--qi-gold-dk) !important; color:var(--qi-gold) !important; }
+
+/* ── Cards no setup ── */
+.qi-card {
+    position    : relative;
+    display     : flex;
+    align-items : center;
+    gap         : 8px;
+    padding     : 6px 8px;
+    background  : var(--qi-card-alt);
+    border      : 1px solid var(--qi-border);
+    border-radius: var(--qi-r);
+    cursor      : grab;
+    transition  : all .18s;
+    user-select : none;
+    width       : 100%;
+    box-sizing  : border-box;
+}
+.qi-card:hover          { border-color:var(--qi-gold-dk); background:var(--qi-card); }
+.qi-card.dragging       { opacity:.3; transform:scale(.93); }
+.villain-col .qi-card   { border-left:3px solid var(--qi-villain); }
+.hero-col    .qi-card   { border-left:3px solid var(--qi-gold); }
+.qi-card-img {
+    width              : 44px;
+    height             : 52px;
+    border-radius      : var(--qi-r);
+    background-size    : cover;
+    background-position: center top;
+    background-color   : var(--qi-hbg);
+    flex-shrink        : 0;
+    border             : 2px solid var(--qi-border-gd);
+}
+.villain-col .qi-card-img { border-color:var(--qi-villain); }
+.hero-col    .qi-card-img { border-color:var(--qi-gold); }
+.qi-card-name {
+    font-size    : 12px;
+    font-weight  : 600;
+    color        : var(--qi-text);
+    flex         : 1;
+    overflow     : hidden;
+    text-overflow: ellipsis;
+    white-space  : nowrap;
+}
+.qi-rm {
+    background    : none !important;
+    border        : none !important;
+    color         : var(--qi-text-dim) !important;
+    font-size     : 13px;
+    cursor        : pointer;
+    padding       : 0 2px;
+    flex-shrink   : 0;
+    margin-left   : auto;
+    transition    : color .15s, transform .15s;
+    border-radius : 3px;
+    width         : 22px;
+    height        : 22px;
+    display       : flex;
+    align-items   : center;
+    justify-content: center;
+}
+.qi-rm:hover { color:var(--qi-villain-lt) !important; transform:scale(1.2); }
+
+/* ── Footer ── */
+.qi-footer {
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    padding-top    : 12px;
+    border-top     : 1px solid rgba(200,146,42,.12);
+}
+.qi-summary    { display:flex; gap:10px; }
+.qi-badge-v {
+    font-family  : 'Cinzel', serif;
+    font-size    : 11px;
+    padding      : 4px 14px;
+    border-radius: 12px;
+    font-weight  : 700;
+    background   : rgba(192,64,64,.08);
+    color        : var(--qi-villain-lt);
+    border       : 1px solid rgba(192,64,64,.28);
+}
+.qi-badge-h {
+    font-family  : 'Cinzel', serif;
+    font-size    : 11px;
+    padding      : 4px 14px;
+    border-radius: 12px;
+    font-weight  : 700;
+    background   : rgba(200,146,42,.08);
+    color        : var(--qi-gold-lt);
+    border       : 1px solid rgba(200,146,42,.28);
+}
+.qi-start {
+    padding       : 11px 28px;
+    background    : linear-gradient(180deg, var(--qi-gold) 0%, #5a3808 100%) !important;
+    color         : #06060e !important;
+    border        : 1px solid var(--qi-gold-lt) !important;
+    border-radius : var(--qi-r);
+    font-family   : 'Cinzel', serif;
+    font-size     : 12px;
+    font-weight   : 700;
+    letter-spacing: .5px;
+    cursor        : pointer;
+    transition    : all .2s;
+    box-shadow    : 0 0 18px var(--qi-gold-glow),
+                    inset 0 1px 0 rgba(255,240,160,.2);
+    display       : flex;
+    align-items   : center;
+    gap           : 8px;
+    position      : relative;
+    overflow      : hidden;
+    text-transform: uppercase;
+}
+.qi-start::before {
+    content   : '';
+    position  : absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,200,.18), transparent);
+    transition: left .5s;
+}
+.qi-start:hover:not(.dis)::before { left: 160%; }
+.qi-start:hover:not(.dis) {
+    background: linear-gradient(180deg, var(--qi-gold-lt) 0%, var(--qi-gold) 100%) !important;
+    box-shadow: 0 0 28px rgba(200,146,42,.55) !important;
+    transform : translateY(-1px);
+}
+.qi-start.dis { opacity:.35; cursor:not-allowed; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   BANNER CENTRAL — faixa épica dark-gold
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Backdrop — escurece o mapa durante rolagem ── */
+#qc-roll-backdrop {
+    position  : fixed;
+    inset     : 0;
+    background: rgba(0,0,0,.6);
+    z-index   : 9099;   /* um abaixo do banner */
+    opacity   : 0;
+    pointer-events: none;
+    transition: opacity .38s ease;
+}
+#qc-roll-backdrop.visible {
+    opacity       : 1;
+    pointer-events: all;
+}
+
+#qc-roll-banner {
+    position      : fixed;
+    top           : 50%;
+    left          : 0;
+    right         : 0;
+    transform     : translateY(-50%) scaleY(.04);
+    transform-origin: center;
+    opacity       : 0;
+    z-index       : 9100;
+    transition    : transform .48s cubic-bezier(.34,1.56,.64,1), opacity .38s ease;
+    pointer-events: none;
+}
+#qc-roll-banner.visible { transform:translateY(-50%) scaleY(1); opacity:1; pointer-events:all; }
+#qc-roll-banner.exit    { transform:translateY(-50%) scaleY(.04); opacity:0; pointer-events:none; }
+
+.qc-banner-inner {
+    display    : grid;
+    grid-template-columns: 1fr 220px 1fr;
+    min-height : 360px;
+    background : linear-gradient(
+        to right,
+        rgba(2,1,0,.98)   0%,
+        rgba(6,4,1,.97)   18%,
+        rgba(14,9,2,.93)  35%,
+        rgba(20,13,3,.88) 50%,
+        rgba(14,9,2,.93)  65%,
+        rgba(6,4,1,.97)   82%,
+        rgba(2,1,0,.98)   100%
+    );
+    border-top   : 2px solid var(--qi-gold);
+    border-bottom: 2px solid var(--qi-gold);
+    box-shadow   : 0 -16px 60px rgba(0,0,0,.9),
+                   0  16px 60px rgba(0,0,0,.9),
+                   0 -2px  32px var(--qi-gold-glow),
+                   0  2px  32px var(--qi-gold-glow),
+                   inset 0 0 120px rgba(0,0,0,.2);
+    overflow     : visible;
+    position     : relative;
+}
+/* Padrão losangular de fundo */
+.qc-banner-inner::before {
+    content       : '';
+    position      : absolute;
+    inset         : 0;
+    z-index       : 0;
+    pointer-events: none;
+    background    : url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 4L56 30L30 56L4 30Z' fill='none' stroke='%23c8922a' stroke-opacity='0.05' stroke-width='0.7'/%3E%3C/svg%3E");
+}
+/* Brilho central dourado — mais intenso no meio */
+.qc-banner-inner::after {
+    content       : '';
+    position      : absolute;
+    inset         : 0;
+    z-index       : 0;
+    pointer-events: none;
+    background    : radial-gradient(ellipse 40% 100% at 50% 50%, rgba(200,146,42,.12) 0%, rgba(200,120,20,.04) 45%, transparent 70%);
+}
+
+.qc-side {
+    padding  : 22px 18px 36px;
+    display  : flex;
+    flex-direction: column;
+    gap      : 12px;
+    z-index  : 1;
+    position : relative;
+    overflow : visible;
+}
+.qc-side.left  { border-right:1px solid rgba(200,146,42,.07); }
+.qc-side.right { border-left :1px solid rgba(200,146,42,.07); }
+.qc-cards-row { display:flex; flex-wrap:wrap; gap:28px 16px; justify-content:center; align-items:flex-start; }
+.qc-side-label {
+    font-family   : 'Cinzel', serif;
+    font-size     : 10px;
+    font-weight   : 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align    : center;
+    margin-bottom : 2px;
+}
+.villain-label { color:rgba(240,112,112,.95); text-shadow:0 0 12px rgba(192,64,64,.5); }
+.hero-label    { color:rgba(232,184,74,.95);  text-shadow:0 0 12px rgba(200,146,42,.5); }
+
+.qc-cards-row { display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:flex-start; }
+.qc-empty-banner {
+    color     : rgba(200,146,42,.12);
+    font-size : 12px;
+    text-align: center;
+    padding   : 40px 0;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 3px;
+}
+
+/* Retrato no banner */
+.qc-pcard {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    position      : relative;
+    cursor        : default;
+    transition    : transform .22s;
+    padding-bottom: 20px; /* espaço para o badge que vaza para fora */
+}
+.qc-pcard.can-roll { cursor:pointer; }
+.qc-pcard.can-roll:hover { transform:translateY(-10px) scale(1.05); }
+
+.qc-portrait {
+    width              : 148px;
+    height             : 200px;
+    background-size    : cover;
+    background-position: center top;
+    background-color   : var(--qi-hbg);
+    border-radius      : 4px;
+    position           : relative;
+    overflow           : visible;
+    border             : none;
+    box-shadow         : 0 12px 40px rgba(0,0,0,.95), inset 0 0 0 1px rgba(200,146,42,.1);
+    transition         : all .22s;
+}
+
+/* Moldura de retrato antigo — overlay sobre a foto */
+.qc-portrait::before {
+    content       : '';
+    position      : absolute;
+    inset         : -6px;
+    z-index       : 5;
+    pointer-events: none;
+    border-radius : 6px;
+    background    :
+        /* cantos ornamentados com gradiente radial */
+        radial-gradient(circle at 0%   0%,   rgba(200,146,42,.55) 0%, transparent 28%),
+        radial-gradient(circle at 100% 0%,   rgba(200,146,42,.55) 0%, transparent 28%),
+        radial-gradient(circle at 0%   100%, rgba(200,146,42,.55) 0%, transparent 28%),
+        radial-gradient(circle at 100% 100%, rgba(200,146,42,.55) 0%, transparent 28%);
+    border        : 2px solid rgba(200,146,42,.45);
+    box-shadow    :
+        inset 0 0 0 1px rgba(200,146,42,.15),
+        inset 0 0 20px rgba(0,0,0,.6),
+        0 0 0 1px rgba(0,0,0,.8);
+}
+/* Borda interna sutil — moldura dupla */
+.qc-portrait::after {
+    content       : '';
+    position      : absolute;
+    inset         : 3px;
+    z-index       : 4;
+    pointer-events: none;
+    border-radius : 3px;
+    border        : 1px solid rgba(200,146,42,.2);
+    pointer-events: none;
+}
+
+/* clip só no retrato em si, não no badge */
+.qc-portrait > *:not(.qc-badge):not(.qc-overlay):not(::before):not(::after) { overflow:hidden; }
+
+.qc-pcard.villain .qc-portrait::before { 
+    border-color: rgba(192,64,64,.5);
+    background:
+        radial-gradient(circle at 0%   0%,   rgba(192,64,64,.5) 0%, transparent 28%),
+        radial-gradient(circle at 100% 0%,   rgba(192,64,64,.5) 0%, transparent 28%),
+        radial-gradient(circle at 0%   100%, rgba(192,64,64,.5) 0%, transparent 28%),
+        radial-gradient(circle at 100% 100%, rgba(192,64,64,.5) 0%, transparent 28%);
+    box-shadow: inset 0 0 0 1px rgba(192,64,64,.15), inset 0 0 20px rgba(0,0,0,.6), 0 0 18px rgba(192,64,64,.2), 0 0 0 1px rgba(0,0,0,.8);
+}
+.qc-pcard.hero .qc-portrait::before { 
+    border-color: rgba(200,146,42,.5);
+    background:
+        radial-gradient(circle at 0%   0%,   rgba(200,146,42,.5) 0%, transparent 28%),
+        radial-gradient(circle at 100% 0%,   rgba(200,146,42,.5) 0%, transparent 28%),
+        radial-gradient(circle at 0%   100%, rgba(200,146,42,.5) 0%, transparent 28%),
+        radial-gradient(circle at 100% 100%, rgba(200,146,42,.5) 0%, transparent 28%);
+    box-shadow: inset 0 0 0 1px rgba(200,146,42,.15), inset 0 0 20px rgba(0,0,0,.6), 0 0 18px rgba(200,146,42,.2), 0 0 0 1px rgba(0,0,0,.8);
+}
+.qc-pcard.can-roll .qc-portrait { animation:ppulse 2s ease infinite; }
+@keyframes ppulse {
+    0%,100% { box-shadow:0 10px 28px rgba(0,0,0,.85), 0 0 0 0   rgba(200,146,42,0); }
+    50%     { box-shadow:0 10px 28px rgba(0,0,0,.85), 0 0 0 3px rgba(200,146,42,.35); }
+}
+
+/* overlay "Rolar" — precisa clip interno */
+.qc-overlay {
+    position       : absolute;
+    inset          : 0;
+    background     : rgba(0,0,0,.65);
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    gap            : 5px;
+    color          : var(--qi-gold-lt);
+    font-size      : 28px;
+    opacity        : 0;
+    transition     : opacity .2s;
+    border-radius  : var(--qi-r);
+    overflow       : hidden;
+}
+.qc-overlay span {
+    font-family   : 'Cinzel', serif;
+    font-size     : 10px;
+    font-weight   : 700;
+    letter-spacing: 2px;
+    color         : var(--qi-text-head);
+    text-transform: uppercase;
+}
+.qc-pcard.can-roll:hover .qc-overlay { opacity:1; }
+.qc-pcard.rolled .qc-portrait::after {
+    content      : '';
+    position     : absolute;
+    inset        : 0;
+    background   : rgba(0,0,0,.35);
+    border-radius: var(--qi-r);
+    pointer-events: none;
+}
+
+/* Badge — posicionado na borda inferior da foto, metade para fora */
+.qc-badge {
+    position       : absolute;
+    bottom         : -20px;
+    left           : 50%;
+    transform      : translateX(-50%);
+    width          : 44px;
+    height         : 44px;
+    border-radius  : 50%;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-family    : 'Cinzel', serif;
+    font-size      : 15px;
+    font-weight    : 900;
+    border         : 2px solid;
+    z-index        : 10;
+    flex-shrink    : 0;
+}
+.qc-badge.gray { background:var(--qi-hbg); border-color:var(--qi-border); color:var(--qi-text-dim); }
+.qc-badge.gold {
+    background  : rgba(8,5,0,.95);
+    border-color: var(--qi-gold);
+    color       : var(--qi-gold-lt);
+    box-shadow  : 0 0 16px var(--qi-gold-glow), 0 2px 8px rgba(0,0,0,.8);
+    animation   : bpop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes bpop { from{transform:translateX(-50%) scale(.2);opacity:0} to{transform:translateX(-50%) scale(1);opacity:1} }
+
+/* Nome removido do banner — mantemos o CSS mas ocultamos */
+.qc-pname { display:none; }
+
+/* Centro do banner */
+.qc-center {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: space-between;
+    padding        : 16px 8px;
+    z-index        : 2;
+    position       : relative;
+    border-left    : 1px solid rgba(200,146,42,.08);
+    border-right   : 1px solid rgba(200,146,42,.08);
+    background     : rgba(0,0,0,.08);
+}
+.qc-sys-name {
+    font-family   : 'Cinzel', serif;
+    font-size     : 9px;
+    color         : rgba(200,146,42,.5);
+    text-align    : center;
+    font-weight   : 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.qc-fabula-hint {
+    font-size  : 10px;
+    color      : rgba(232,184,74,.85);
+    text-align : center;
+    max-width  : 178px;
+    line-height: 1.5;
+    margin-top : 6px;
+    padding    : 7px 10px;
+    background : rgba(200,146,42,.05);
+    border     : 1px solid rgba(200,146,42,.18);
+    border-radius: var(--qi-r);
+}
+.qc-fabula-hint b { color:var(--qi-gold-lt); font-weight:700; }
+
+#qc-dice-stage { flex:1; width:100%; position:relative; overflow:visible; min-height:120px; }
+
+.qc-center-btns { display:flex; flex-direction:column; align-items:center; gap:7px; width:100%; }
+
+.qc-roll-all {
+    width          : 100%;
+    padding        : 9px 10px;
+    background     : rgba(200,146,42,.09) !important;
+    color          : var(--qi-gold) !important;
+    border         : 1px solid var(--qi-gold-dk) !important;
+    border-radius  : var(--qi-r);
+    font-family    : 'Cinzel', serif;
+    font-size      : 10px;
+    font-weight    : 700;
+    letter-spacing : .5px;
+    text-transform : uppercase;
+    cursor         : pointer;
+    transition     : all .18s;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    gap            : 5px;
+}
+.qc-roll-all:hover {
+    background: rgba(200,146,42,.2) !important;
+    border-color: var(--qi-gold) !important;
+    color: var(--qi-gold-lt) !important;
+    box-shadow: 0 0 12px var(--qi-gold-glow);
+}
+
+.qc-go-btn {
+    width          : 100%;
+    padding        : 11px 8px;
+    background     : linear-gradient(180deg, var(--qi-gold) 0%, #5a3808 100%) !important;
+    color          : #06060e !important;
+    border         : 1px solid var(--qi-gold-lt) !important;
+    border-radius  : var(--qi-r);
+    font-family    : 'Cinzel', serif;
+    font-size      : 10px;
+    font-weight    : 900;
+    letter-spacing : 1px;
+    text-transform : uppercase;
+    cursor         : pointer;
+    display        : none;
+    align-items    : center;
+    justify-content: center;
+    gap            : 5px;
+    animation      : gopulse 1.4s ease infinite;
+}
+.qc-go-btn.show { display:flex; }
+.qc-go-btn:hover { transform:scale(1.04); }
+@keyframes gopulse {
+    0%,100% { box-shadow:0 0 12px var(--qi-gold-glow); }
+    50%     { box-shadow:0 0 28px rgba(200,146,42,.7), inset 0 0 20px rgba(255,220,100,.08); }
+}
+
+.qc-cancel-x { background:none !important; border:none !important; color:var(--qi-text-dim) !important; font-size:11px; cursor:pointer; transition:color .15s; padding:2px 8px; }
+.qc-cancel-x:hover { color:var(--qi-villain-lt) !important; }
+
+.qc-waiting {
+    font-size  : 11px;
+    color      : rgba(232,184,74,.75);
+    text-align : center;
+    line-height: 1.6;
+    padding    : 7px 10px;
+    border     : 1px solid rgba(200,146,42,.16);
+    border-radius: var(--qi-r);
+    background : rgba(200,146,42,.04);
+    animation  : waitpulse 2s ease infinite;
+    font-family: 'Lato', sans-serif;
+}
+@keyframes waitpulse { 0%,100%{opacity:.7} 50%{opacity:1} }
+
+/* ════════════════════════════════════════════════════════════════════════
+   DADO 3D — ouro escuro
+   ════════════════════════════════════════════════════════════════════════ */
+.qc-die {
+    position      : absolute;
+    width         : 96px;
+    height        : 96px;
+    transform     : translateX(-50%);
+    top           : -120px;
+    pointer-events: none;
+    z-index       : 200;
+    filter        : drop-shadow(0 8px 20px rgba(0,0,0,.95))
+                    drop-shadow(0 0 18px rgba(200,146,42,.55));
+}
+.qc-die svg { width:100%; height:100%; }
+.qc-die.falling { animation:dieFall 1.5s cubic-bezier(.22,1,.36,1) forwards; }
+@keyframes dieFall {
+    0%   { top:-120px; transform:translateX(-50%) rotate(0deg) scale(.2); opacity:0; }
+    12%  { opacity:1; }
+    60%  { top:calc(var(--ty)*.4); transform:translateX(calc(-50% + var(--tx)*.6)) rotate(calc(var(--rot)*.7)) scale(1.3); }
+    78%  { top:var(--ty); transform:translateX(calc(-50% + var(--tx))) rotate(calc(var(--rot)*.92)) scale(.82); }
+    90%  { transform:translateX(calc(-50% + var(--tx))) rotate(var(--rot)) scale(1.08); }
+    100% { top:var(--ty); transform:translateX(calc(-50% + var(--tx))) rotate(var(--rot)) scale(1); opacity:.9; }
+}
+.qc-die-hero {
+    width  : 116px !important; height:116px !important; top:-140px;
+    filter : drop-shadow(0 10px 28px rgba(0,0,0,.95))
+             drop-shadow(0 0 28px rgba(200,146,42,.8))
+             drop-shadow(0 0 14px rgba(255,220,80,.5)) !important;
+}
+.qc-die-hero.falling { animation:dieFallHero 2s cubic-bezier(.22,1,.36,1) forwards; }
+@keyframes dieFallHero {
+    0%   { top:-140px; transform:translateX(-50%) rotate(0deg) scale(.15); opacity:0; }
+    10%  { opacity:1; }
+    55%  { top:calc(var(--ty)*.35); transform:translateX(calc(-50% + var(--tx)*.5)) rotate(calc(var(--rot)*.6)) scale(1.4); }
+    75%  { top:var(--ty); transform:translateX(calc(-50% + var(--tx))) rotate(calc(var(--rot)*.9)) scale(.78); }
+    88%  { transform:translateX(calc(-50% + var(--tx))) rotate(var(--rot)) scale(1.12); }
+    96%  { transform:translateX(calc(-50% + var(--tx))) rotate(var(--rot)) scale(.97); opacity:1; }
+    100% { top:var(--ty); transform:translateX(calc(-50% + var(--tx))) rotate(var(--rot)) scale(1); opacity:1; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   TRACKER — Carrossel 5 slots, botões alinhados, sem fundo
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Wrapper externo — sem fundo, sem borda, só posicionamento */
+#qc-tracker {
+    position      : fixed;
+    top           : 0;
+    left          : 50%;
+    transform     : translateX(-50%);
+    z-index       : 9000;
+    pointer-events: none;
+    opacity       : 0;
+    transition    : opacity .4s ease;
+    width         : auto;
+    min-width     : 200px;
+    height        : auto;
+    min-height    : 220px;
+}
+#qc-tracker.visible  { opacity:1; pointer-events:all; }
+/* Quando desbloqueado e arrastado, position é controlada por left/top inline */
+#qc-tracker.unlocked { bottom:auto; transform:none; }
+
+/* ════════════════════════════════════════════════════════════
+   LAYOUT ADAPTATIVO — dock-bottom / dock-top / dock-left / dock-right
+   ════════════════════════════════════════════════════════════ */
+
+/* ══ BASE (dock-bottom, padrão) ══
+   Horizontal: [lock+‹] [carrossel] [✕+›]
+   Escadinha: centro SOBE (translateY menor), laterais descem */
+.qt-inner {
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+    gap            : 6px;
+    padding        : 16px 0 12px 0;
+    justify-content: center;
+    overflow       : visible;
+}
+.qt-left-col, .qt-right-col {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 8px;
+    flex-shrink   : 0;
+}
+
+/* ══ DOCK-TOP ══
+   Layout igual ao bottom (botões nas laterais).
+   SÓ muda: escadinha invertida (centro DESCE), badges trocam de lado. */
+/* setas iguais ao bottom: ‹ = esquerda, › = direita */
+#qc-tracker.dock-top .qt-nav-prev i,
+#qc-tracker.dock-top .qt-nav-next i { transform: none; }
+
+/* Carrossel alinha pelo TOPO para que translateY positivo empurre para baixo */
+#qc-tracker.dock-top .qt-carousel {
+    align-items   : flex-start !important;
+    padding-top   : 8px !important;
+    padding-bottom: 0 !important;
+}
+
+/* escadinha invertida: centro desce levemente, laterais ficam no topo */
+#qc-tracker.dock-top .qt-card.active-turn {
+    transform: translateY(8px) !important;
+}
+#qc-tracker.dock-top .qt-card.adj-turn {
+    transform: translateY(4px)  !important;
+}
+#qc-tracker.dock-top .qt-card.far-turn {
+    transform: translateY(0px)  !important;
+}
+/* "Rodada" vai para BAIXO da foto */
+#qc-tracker.dock-top .qt-round-label {
+    top    : auto   !important;
+    bottom : -15px  !important;
+}
+/* Badge de iniciativa vai para o TOPO */
+#qc-tracker.dock-top .qt-init-badge {
+    bottom : auto   !important;
+    top    : -17px  !important;
+}
+
+/* ══ DOCK-LEFT ══
+   Carrossel VERTICAL à esquerda + coluna de botões à DIREITA
+   Layout: [carrossel-vertical] [col: lock / ✕ / ‹ / ›]
+   Setas: ‹ = esquerda (voltar), › = direita (avançar) — iguais ao bottom */
+#qc-tracker.dock-left .qt-inner {
+    flex-direction: row;
+    align-items   : flex-start;
+    padding       : 8px 0;
+}
+/* esconde colunas originais, mostra carrossel + nova col botões */
+#qc-tracker.dock-left .qt-left-col  { display: none !important; }
+#qc-tracker.dock-left .qt-right-col { display: none !important; }
+#qc-tracker.dock-left .qt-carousel {
+    flex-direction     : column !important;
+    width              : 130px  !important;
+    height             : auto   !important;
+    align-items        : flex-end !important;
+    gap                : -55px  !important;
+    overflow           : visible !important;
+    padding            : 4px 16px 4px 0 !important;
+    -webkit-mask-image : linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%) !important;
+    mask-image         : linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%) !important;
+}
+/* escadinha horizontal: centro desloca para DIREITA */
+#qc-tracker.dock-left .qt-card.active-turn { transform: translateX(12px) !important; }
+#qc-tracker.dock-left .qt-card.adj-turn    { transform: translateX(6px)  !important; }
+#qc-tracker.dock-left .qt-card.far-turn    { transform: translateX(0px)  !important; }
+/* botões: coluna à direita do carrossel */
+#qc-tracker.dock-left .qt-dock-btn-col {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    gap            : 8px;
+    flex-shrink    : 0;
+    padding-top    : 12px;
+}
+/* setas normais (sem rotação) */
+#qc-tracker.dock-left .qt-nav-prev i,
+#qc-tracker.dock-left .qt-nav-next i { transform: none !important; }
+
+/* ══ DOCK-RIGHT ══
+   Carrossel VERTICAL à direita + coluna de botões à ESQUERDA
+   Layout: [col: lock / ✕ / ‹ / ›] [carrossel-vertical]
+   Setas: ‹ = esquerda (voltar), › = direita (avançar) — iguais ao bottom */
+#qc-tracker.dock-right .qt-inner {
+    flex-direction: row;
+    align-items   : flex-start;
+    padding       : 8px 0;
+}
+#qc-tracker.dock-right .qt-left-col  { display: none !important; }
+#qc-tracker.dock-right .qt-right-col { display: none !important; }
+#qc-tracker.dock-right .qt-carousel {
+    flex-direction     : column !important;
+    width              : 130px  !important;
+    height             : auto   !important;
+    align-items        : flex-start !important;
+    gap                : -55px  !important;
+    overflow           : visible !important;
+    padding            : 4px 0 4px 16px !important;
+    order              : 2;
+    -webkit-mask-image : linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%) !important;
+    mask-image         : linear-gradient(to bottom, transparent 0%, black 18%, black 82%, transparent 100%) !important;
+}
+/* escadinha horizontal: centro desloca para ESQUERDA */
+#qc-tracker.dock-right .qt-card.active-turn { transform: translateX(-12px) !important; }
+#qc-tracker.dock-right .qt-card.adj-turn    { transform: translateX(-6px)  !important; }
+#qc-tracker.dock-right .qt-card.far-turn    { transform: translateX(0px)   !important; }
+/* botões: coluna à esquerda do carrossel */
+#qc-tracker.dock-right .qt-dock-btn-col {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    gap            : 8px;
+    flex-shrink    : 0;
+    padding-top    : 12px;
+    order          : 1;
+}
+#qc-tracker.dock-right .qt-nav-prev i,
+#qc-tracker.dock-right .qt-nav-next i { transform: none !important; }
+
+/* Tamanhos dos retratos no modo vertical (mesmos do horizontal) */
+#qc-tracker.dock-left  .qt-card.active-turn .qt-portrait,
+#qc-tracker.dock-right .qt-card.active-turn .qt-portrait { width: 95px;  height: 128px; }
+#qc-tracker.dock-left  .qt-card.adj-turn .qt-portrait,
+#qc-tracker.dock-right .qt-card.adj-turn .qt-portrait    { width: 84px;  height: 112px; }
+#qc-tracker.dock-left  .qt-card.far-turn .qt-portrait,
+#qc-tracker.dock-right .qt-card.far-turn .qt-portrait    { width: 72px;  height: 96px;  }
+
+/* Mostrar apenas 3 cards na lateral (esconder far-turn) */
+#qc-tracker.dock-left  .qt-card.far-turn,
+#qc-tracker.dock-right .qt-card.far-turn { display: none !important; }
+
+/* ══ DOCK-TOP: extra room abaixo para escadinha que desce ══ */
+#qc-tracker.dock-top { min-height: 260px !important; }
+
+/* qt-dock-btn-col: invisível por padrão */
+.qt-dock-btn-col { display: none !important; }
+#qc-tracker.dock-left  .qt-dock-btn-col { display: flex !important; }
+#qc-tracker.dock-right .qt-dock-btn-col { display: flex !important; }
+
+
+/* ── Cadeado — à esquerda do botão ‹, mesmo alinhamento vertical ── */
+.qt-lock-btn {
+    background    : rgba(0,0,0,.7) !important;
+    border        : 1px solid rgba(200,146,42,.4) !important;
+    color         : var(--qi-gold-dk) !important;
+    font-size     : 14px;
+    cursor        : pointer;
+    width         : 38px;
+    height        : 38px;
+    border-radius : 50%;
+    display       : flex;
+    align-items   : center;
+    justify-content: center;
+    transition    : all .18s;
+    backdrop-filter: blur(6px);
+    box-shadow    : 0 2px 12px rgba(0,0,0,.9);
+    flex-shrink   : 0;
+    padding       : 0;
+}
+.qt-lock-btn:hover {
+    border-color: var(--qi-gold) !important;
+    color: var(--qi-gold-lt) !important;
+    box-shadow: 0 0 16px var(--qi-gold-glow) !important;
+}
+#qc-tracker.unlocked .qt-lock-btn {
+    color: var(--qi-gold-lt) !important;
+    border-color: var(--qi-gold) !important;
+    box-shadow: 0 0 14px var(--qi-gold-glow) !important;
+    cursor: grab;
+}
+#qc-tracker.unlocked .qt-lock-btn:active { cursor: grabbing; }
+
+/* ── Nav buttons: ‹ › ✕ — mesmos tamanho/estilo ── */
+.qt-nav {
+    background     : rgba(0,0,0,.7) !important;
+    border         : 1px solid rgba(200,146,42,.35) !important;
+    color          : var(--qi-gold-dk) !important;
+    font-size      : 20px;
+    cursor         : pointer;
+    width          : 42px;
+    height         : 42px;
+    border-radius  : 50%;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    transition     : all .18s;
+    backdrop-filter: blur(6px);
+    box-shadow     : 0 2px 12px rgba(0,0,0,.9);
+    flex-shrink    : 0;
+    padding        : 0;
+}
+.qt-nav:hover {
+    color: var(--qi-gold-lt) !important;
+    border-color: var(--qi-gold) !important;
+    box-shadow: 0 0 18px var(--qi-gold-glow) !important;
+}
+.qt-nav-spacer { width:42px; flex-shrink:0; }
+
+/* ✕ menor e vermelho */
+.qt-nav-end {
+    font-size: 15px !important;
+    color: rgba(192,64,64,.65) !important;
+    border-color: rgba(192,64,64,.35) !important;
+    width: 34px !important;
+    height: 34px !important;
+}
+.qt-nav-end:hover {
+    color: var(--qi-villain-lt) !important;
+    border-color: var(--qi-villain-lt) !important;
+    box-shadow: 0 0 14px rgba(192,64,64,.6) !important;
+}
+
+/* ── Coluna direita: ✕ em cima, › em baixo ── */
+.qt-right-col {
+    display       : flex;
+    flex-direction: column;
+    align-items   : center;
+    gap           : 8px;
+    flex-shrink   : 0;
+}
+
+/* ── Carrossel: exatamente 5 cards, ativo no centro ── */
+.qt-carousel {
+    display        : flex;
+    align-items    : flex-end;
+    justify-content: center;
+    gap            : 8px;
+    position       : relative;
+    overflow-x     : visible;
+    overflow-y     : visible;
+    /* largura: 2×far(72) + 2×adj(84) + 1×active(95) + 4×gap(8) = 363px */
+    width          : 365px;
+    flex-shrink    : 0;
+    padding-bottom : 8px;
+    /* Fade suave nas bordas — sem corte seco */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%);
+    mask-image        : linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%);
+}
+
+/* ── Rótulo "Rodada N" — badge no topo do portrait ativo (igual init-badge mas em cima) ── */
+.qt-round-label {
+    position      : absolute;
+    top           : -15px;
+    left          : 50%;
+    transform     : translateX(-50%);
+    font-family   : 'Cinzel', serif;
+    font-size     : 9px;
+    font-weight   : 900;
+    color         : var(--qi-gold-lt);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space   : nowrap;
+    pointer-events: none;
+    z-index       : 30;
+    padding       : 3px 10px;
+    background    : rgba(8,5,0,.95);
+    border        : 2px solid var(--qi-gold);
+    border-radius : 20px;
+    box-shadow    : 0 0 12px var(--qi-gold-glow), 0 2px 6px rgba(0,0,0,.8);
+    text-shadow   : 0 0 10px var(--qi-gold-glow);
+    animation     : roundPop .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes roundPop {
+    from { transform:translateX(-50%) scale(.5); opacity:0; }
+    to   { transform:translateX(-50%) scale(1);  opacity:1; }
+}
+
+/* ── Divisor de fim de rodada ── */
+.qt-round-divider {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    position       : relative;
+    flex-shrink    : 0;
+    width          : 18px;
+    align-self     : stretch;   /* ocupa toda a altura do carrossel */
+    z-index        : 20;
+}
+.qt-round-divider::before {
+    content   : '';
+    position  : absolute;
+    top       : 8%;
+    bottom    : 8%;
+    left      : 50%;
+    width     : 2px;
+    transform : translateX(-50%);
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        var(--qi-gold) 25%,
+        var(--qi-gold-lt) 50%,
+        var(--qi-gold) 75%,
+        transparent 100%
+    );
+    box-shadow: 0 0 8px var(--qi-gold-glow), 0 0 18px rgba(200,146,42,.4);
+    border-radius: 2px;
+    animation : dividerPulse 2.4s ease infinite;
+}
+.qt-round-divider-label {
+    position       : relative;
+    z-index        : 2;
+    font-size      : 13px;
+    color          : var(--qi-gold-lt);
+    text-shadow    : 0 0 12px var(--qi-gold-glow), 0 0 24px rgba(200,146,42,.6);
+    background     : rgba(6,6,14,.92);
+    border         : 1px solid var(--qi-gold);
+    border-radius  : 50%;
+    width          : 18px;
+    height         : 18px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    box-shadow     : 0 0 10px var(--qi-gold-glow);
+    animation      : dividerPulse 2.4s ease infinite;
+}
+@keyframes dividerPulse {
+    0%,100% { opacity: .7; }
+    50%     { opacity: 1;  }
+}
+
+/* Modo dock-left / dock-right: divider vira horizontal */
+#qc-tracker.dock-left  .qt-round-divider,
+#qc-tracker.dock-right .qt-round-divider {
+    flex-direction: row;
+    width         : auto;
+    height        : 18px;
+    align-self    : stretch;
+}
+#qc-tracker.dock-left  .qt-round-divider::before,
+#qc-tracker.dock-right .qt-round-divider::before {
+    top    : 50%;
+    bottom : auto;
+    left   : 8%;
+    right  : 8%;
+    width  : auto;
+    height : 2px;
+    transform: translateY(-50%);
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--qi-gold) 25%,
+        var(--qi-gold-lt) 50%,
+        var(--qi-gold) 75%,
+        transparent 100%
+    );
+}
+
+
+.qt-card {
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    gap            : 5px;
+    flex-shrink    : 0;
+    cursor         : default;
+    transition     : all .38s cubic-bezier(.34,1.22,.64,1);
+    position       : relative;
+    padding-bottom : 20px; /* espaço para o badge na borda inferior */
+}
+.qt-card[draggable="true"]        { cursor: grab; }
+.qt-card[draggable="true"]:active { cursor: grabbing; }
+.qt-card.qt-dragging  { opacity:.3; }
+.qt-card.qt-drag-over { outline:2px solid var(--qi-gold); outline-offset:4px; border-radius:6px; }
+
+
+/* ══════════════════════════════════════════════════════════════
+   ESCADINHA ADAPTATIVA POR DOCK
+   ══════════════════════════════════════════════════════════════
+
+   BOTTOM (padrão): centro no topo, laterais descem
+     active=0, adj=+2px, far=+4px  ← já definido nos cards base
+
+   TOP (invertida): centro desce, laterais sobem
+     active=+12px, adj=+6px, far=0px  → "escadinha de cabeça p/ baixo"
+
+   LEFT: escadinha horizontal — centro à direita, laterais à esquerda
+   RIGHT: espelho — centro à esquerda, laterais à direita
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── DOCK-LEFT: escadinha horizontal → centro vai para DIREITA ── */
+#qc-tracker.dock-left .qt-card.active-turn {
+    transform: translateX(10px) !important;
+}
+#qc-tracker.dock-left .qt-card.adj-turn {
+    transform: translateX(5px) !important;
+}
+#qc-tracker.dock-left .qt-card.far-turn {
+    transform: translateX(0px) !important;
+}
+
+/* ── DOCK-RIGHT: escadinha horizontal → centro vai para ESQUERDA ── */
+#qc-tracker.dock-right .qt-card.active-turn {
+    transform: translateX(-10px) !important;
+}
+#qc-tracker.dock-right .qt-card.adj-turn {
+    transform: translateX(-5px) !important;
+}
+#qc-tracker.dock-right .qt-card.far-turn {
+    transform: translateX(0px) !important;
+}
+
+/* ATIVO — grande, sobe */
+/* ────────────────────────────────────────────────────────────────────────
+   ANIMAÇÕES DO CARROSSEL
+   Avançar (next): tudo desliza da direita → esquerda
+     - card novo entra da direita (enter-from-right)
+     - card saindo vai para esquerda (exit-to-left)
+   Voltar (prev): tudo desliza da esquerda → direita
+     - card novo entra da esquerda (enter-from-left)
+     - card saindo vai para direita (exit-to-right)
+   ──────────────────────────────────────────────────────────────────────── */
+
+/* ── Animações de entrada do carrossel ── */
+@keyframes carousel-enter-right {
+    0%   { opacity:0; transform:translateX(80px) scale(.82) translateY(var(--qt-card-y,0px)); }
+    65%  { opacity:1; transform:translateX(-6px)  scale(1.02) translateY(var(--qt-card-y,0px)); }
+    100% { opacity:1; transform:translateX(0)     scale(1)    translateY(var(--qt-card-y,0px)); }
+}
+@keyframes carousel-enter-left {
+    0%   { opacity:0; transform:translateX(-80px) scale(.82) translateY(var(--qt-card-y,0px)); }
+    65%  { opacity:1; transform:translateX(6px)   scale(1.02) translateY(var(--qt-card-y,0px)); }
+    100% { opacity:1; transform:translateX(0)     scale(1)    translateY(var(--qt-card-y,0px)); }
+}
+.qt-card.entering-right { animation: carousel-enter-right .42s cubic-bezier(.34,1.28,.64,1) forwards !important; }
+.qt-card.entering-left  { animation: carousel-enter-left  .42s cubic-bezier(.34,1.28,.64,1) forwards !important; }
+
+/* ATIVO — centro, sobe mais, grande */
+.qt-card.active-turn {
+    --qt-card-y: 0px;
+    transform: translateY(0px);
+    z-index: 10;
+    padding-top: 16px; /* espaço para badge "Rodada" no topo */
+}
+.qt-card.active-turn .qt-portrait {
+    width    : 95px;
+    height   : 128px;
+    filter   : brightness(1) saturate(1);
+    border   : 2px solid var(--qi-gold) !important;
+    box-shadow:
+        0 0 0 2px rgba(200,146,42,.45),
+        0 0 36px rgba(200,146,42,.65),
+        0 0 80px rgba(200,146,42,.3),
+        0 24px 60px rgba(0,0,0,.98);
+    animation: qt-glow-pulse 2s ease infinite;
+}
+/* Glow do ativo varia por lado — sobrescrito pelo JS de cores dinâmicas */
+.qt-card.active-turn.villain .qt-portrait {
+    border-color: rgba(192,64,64,.8) !important;
+    animation: qt-glow-pulse-villain 2s ease infinite;
+}
+@keyframes qt-glow-pulse-villain {
+    0%,100% { box-shadow: 0 0 0 2px rgba(192,64,64,.45), 0 0 36px rgba(192,64,64,.65), 0 0 80px rgba(192,64,64,.3), 0 24px 60px rgba(0,0,0,.98); }
+    50%     { box-shadow: 0 0 0 4px rgba(192,64,64,.65), 0 0 52px rgba(192,64,64,.92), 0 0 100px rgba(192,64,64,.45), 0 24px 60px rgba(0,0,0,.98); }
+}
+.qt-card.active-turn.hero .qt-portrait {
+    border-color: rgba(200,146,42,.8) !important;
+    animation: qt-glow-pulse 2s ease infinite;
+}
+@keyframes qt-glow-pulse {
+    0%,100% { box-shadow: 0 0 0 2px rgba(200,146,42,.45), 0 0 36px rgba(200,146,42,.65), 0 0 80px rgba(200,146,42,.3), 0 24px 60px rgba(0,0,0,.98); }
+    50%     { box-shadow: 0 0 0 4px rgba(200,146,42,.65), 0 0 52px rgba(200,146,42,.92), 0 0 100px rgba(200,146,42,.45), 0 24px 60px rgba(0,0,0,.98); }
+}
+.qt-card.active-turn .qt-card-name {
+    color      : var(--qi-gold-lt);
+    font-size  : 10px;
+    text-shadow: 0 0 10px var(--qi-gold-glow);
+}
+.qt-card.active-turn .qt-init-badge {
+    width    : 34px;
+    height   : 34px;
+    font-size: 12px;
+    bottom   : -17px;
+}
+
+/* ADJACENTE (dist 1) — ~15px menor que ativo */
+.qt-card.adj-turn {
+    --qt-card-y: 2px;
+    transform: translateY(2px);
+}
+.qt-card.adj-turn .qt-portrait {
+    width : 84px;
+    height: 112px;
+    filter: brightness(.82) saturate(.75);
+}
+
+/* DISTANTE (dist 2) — ~15px menor que adjacente */
+.qt-card.far-turn {
+    --qt-card-y: 4px;
+    transform: translateY(4px);
+}
+.qt-card.far-turn .qt-portrait {
+    width : 72px;
+    height: 96px;
+    filter: brightness(.55) saturate(.4);
+}
+
+/* Portrait base */
+.qt-portrait {
+    width              : 60px;
+    height             : 80px;
+    border-radius      : 6px;
+    background-size    : cover;
+    background-position: center top;
+    background-color   : var(--qi-hbg);
+    position           : relative;
+    flex-shrink        : 0;
+    border             : 1px solid rgba(200,146,42,.15);
+    transition         : all .38s cubic-bezier(.34,1.22,.64,1);
+    box-shadow         : 0 8px 24px rgba(0,0,0,.92);
+}
+.qt-card.hero    .qt-portrait { border-color: rgba(200,146,42,.3); }
+.qt-card.villain .qt-portrait { border-color: rgba(192,64,64,.3); }
+
+/* Nome */
+.qt-card-name {
+    font-family   : 'Cinzel', serif;
+    font-size     : 8px;
+    font-weight   : 700;
+    color         : rgba(200,146,42,.38);
+    text-align    : center;
+    max-width     : 90px;
+    overflow      : hidden;
+    text-overflow : ellipsis;
+    white-space   : nowrap;
+    letter-spacing: .3px;
+    transition    : color .3s;
+    text-shadow   : 0 1px 6px rgba(0,0,0,.95);
+}
+
+/* Badge de iniciativa — borda inferior do retrato */
+.qt-init-badge {
+    position       : absolute;
+    bottom         : -16px;
+    top            : auto;
+    left           : 50%;
+    transform      : translateX(-50%);
+    width          : 30px;
+    height         : 30px;
+    border-radius  : 50%;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-family    : 'Cinzel', serif;
+    font-size      : 9px;
+    font-weight    : 900;
+    border         : 2px solid;
+    z-index        : 5;
+    transition     : all .35s;
+}
+.qt-init-badge.gray {
+    background  : rgba(6,6,14,.92);
+    border-color: var(--qi-border);
+    color       : var(--qi-text-dim);
+}
+.qt-init-badge.gold {
+    background  : rgba(8,5,0,.97);
+    border-color: var(--qi-gold);
+    color       : var(--qi-gold-lt);
+    box-shadow  : 0 0 14px var(--qi-gold-glow);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   BOTÃO FIXO NA BARRA LATERAL
+   ════════════════════════════════════════════════════════════════════════ */
+.qi-sidebar-li { list-style:none !important; margin:0 !important; padding:0 !important; }
+#qi-sidebar-btn {
+    display        : flex !important;
+    align-items    : center !important;
+    justify-content: center !important;
+    width          : 36px !important;
+    height         : 36px !important;
+    border-radius  : 5px !important;
+    border         : 1px solid rgba(200,146,42,.45) !important;
+    background     : rgba(200,146,42,.12) !important;
+    color          : var(--qi-gold) !important;
+    font-size      : 16px !important;
+    cursor         : pointer !important;
+    transition     : all .18s !important;
+    box-shadow     : 0 0 8px var(--qi-gold-glow) !important;
+    padding        : 0 !important;
+    margin         : 2px auto !important;
+}
+#qi-sidebar-btn:hover {
+    background  : rgba(200,146,42,.28) !important;
+    color       : var(--qi-gold-lt) !important;
+    border-color: rgba(232,184,74,.7) !important;
+    box-shadow  : 0 0 14px rgba(200,146,42,.55) !important;
+}
+#qi-fixed-btn {
+    background  : rgba(200,146,42,.12) !important;
+    color       : var(--qi-gold) !important;
+    border      : 2px solid rgba(200,146,42,.5) !important;
+    box-shadow  : 0 0 12px var(--qi-gold-glow) !important;
+    border-radius: 8px !important;
+}
+#qi-fixed-btn:hover {
+    background : rgba(200,146,42,.28) !important;
+    color      : var(--qi-gold-lt) !important;
+    border-color: var(--qi-gold) !important;
+    box-shadow : 0 0 22px rgba(200,146,42,.6) !important;
+    transform  : scale(1.1) !important;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   MENU DE CONTEXTO
+   ════════════════════════════════════════════════════════════════════════ */
+.qt-ctx-menu {
+    position      : fixed;
+    z-index       : 99999;
+    min-width     : 196px;
+    background    : var(--qi-card);
+    border        : 1px solid var(--qi-gold);
+    border-radius : var(--qi-r-lg);
+    box-shadow    : 0 10px 40px rgba(0,0,0,.88), 0 0 20px var(--qi-gold-glow);
+    overflow      : hidden;
+    opacity       : 0;
+    transform     : scale(.92);
+    transition    : opacity .14s ease, transform .14s ease;
+    pointer-events: none;
+}
+.qt-ctx-menu.show { opacity:1; transform:scale(1); pointer-events:all; }
+.qt-ctx-header {
+    padding       : 9px 14px 6px;
+    font-family   : 'Cinzel', serif;
+    font-size     : 10px;
+    font-weight   : 700;
+    color         : var(--qi-gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom : 1px solid rgba(200,146,42,.12);
+    text-shadow   : 0 0 8px var(--qi-gold-glow);
+}
+.qt-ctx-item {
+    display   : flex;
+    align-items: center;
+    gap       : 8px;
+    width     : 100%;
+    padding   : 9px 14px;
+    background: none !important;
+    border    : none !important;
+    color     : var(--qi-text) !important;
+    font-size : 12px;
+    font-weight: 600;
+    cursor    : pointer;
+    text-align: left;
+    transition: background .15s, color .15s;
+}
+.qt-ctx-item:hover { background:var(--qi-gold-faint) !important; color:var(--qi-text-head) !important; }
+.qt-ctx-item i { font-size:13px; color:var(--qi-gold-dk); width:16px; text-align:center; }
+.qt-ctx-item:hover i { color:var(--qi-gold); }
+.qt-ctx-item.danger       { color:var(--qi-villain-lt) !important; }
+.qt-ctx-item.danger i     { color:var(--qi-villain); }
+.qt-ctx-item.danger:hover { background:rgba(192,64,64,.1) !important; color:var(--qi-villain-lt) !important; }
+.qt-ctx-sep { height:1px; background:rgba(200,146,42,.1); margin:3px 0; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   DIÁLOGO INLINE DE EDIÇÃO
+   ════════════════════════════════════════════════════════════════════════ */
+.qt-ctx-edit-dialog {
+    position    : fixed;
+    z-index     : 99999;
+    background  : var(--qi-card);
+    border      : 1px solid var(--qi-gold);
+    border-radius: var(--qi-r-lg);
+    padding     : 14px 16px;
+    box-shadow  : 0 10px 40px rgba(0,0,0,.9), 0 0 24px var(--qi-gold-glow);
+    animation   : ctxFadeIn .14s ease;
+}
+@keyframes ctxFadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.qt-ced-title {
+    font-family   : 'Cinzel', serif;
+    font-size     : 10px;
+    color         : var(--qi-gold);
+    margin-bottom : 10px;
+    font-weight   : 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+}
+.qt-ced-title b  { color:var(--qi-text-head); }
+.qt-ced-row      { display:flex; align-items:center; gap:6px; }
+.qt-ced-input {
+    flex       : 1;
+    background : var(--qi-hbg) !important;
+    border     : 1px solid var(--qi-gold-dk) !important;
+    border-radius: var(--qi-r);
+    color      : var(--qi-gold-lt) !important;
+    font-family: 'Cinzel', serif !important;
+    font-size  : 24px !important;
+    font-weight: 900;
+    text-align : center;
+    padding    : 4px 6px;
+    width      : 70px;
+    outline    : none;
+}
+.qt-ced-input:focus { border-color:var(--qi-gold) !important; box-shadow:0 0 12px var(--qi-gold-glow); }
+.qt-ced-input::-webkit-outer-spin-button,
+.qt-ced-input::-webkit-inner-spin-button { -webkit-appearance:none; }
+.qt-ced-ok, .qt-ced-cancel {
+    width          : 32px;
+    height         : 32px;
+    border-radius  : var(--qi-r);
+    border         : 1px solid;
+    cursor         : pointer;
+    font-size      : 13px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    transition     : all .15s;
+    flex-shrink    : 0;
+}
+.qt-ced-ok     { background:rgba(200,146,42,.1) !important; color:var(--qi-gold) !important; border-color:var(--qi-gold-dk) !important; }
+.qt-ced-ok:hover { background:rgba(200,146,42,.28) !important; border-color:var(--qi-gold) !important; }
+.qt-ced-cancel { background:rgba(192,64,64,.08) !important; color:var(--qi-villain-lt) !important; border-color:rgba(192,64,64,.3) !important; }
+.qt-ced-cancel:hover { background:rgba(192,64,64,.22) !important; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   PICKER — Adicionar combatente
+   ════════════════════════════════════════════════════════════════════════ */
+.qt-add-picker {
+    position    : fixed;
+    z-index     : 99999;
+    width       : 300px;
+    background  : var(--qi-card);
+    border      : 1px solid var(--qi-gold);
+    border-radius: var(--qi-r-lg);
+    box-shadow  : 0 14px 50px rgba(0,0,0,.9), 0 0 28px var(--qi-gold-glow);
+    overflow    : hidden;
+    animation   : ctxFadeIn .18s ease;
+}
+.qt-add-hd {
+    display        : flex;
+    align-items    : center;
+    justify-content: space-between;
+    padding        : 10px 14px;
+    background     : rgba(200,146,42,.07);
+    border-bottom  : 1px solid rgba(200,146,42,.18);
+    font-family    : 'Cinzel', serif;
+    font-size      : 11px;
+    font-weight    : 700;
+    color          : var(--qi-gold);
+    letter-spacing : .5px;
+}
+.qt-add-close { background:none !important; border:none !important; color:var(--qi-text-muted) !important; cursor:pointer; font-size:13px; padding:0; transition:color .15s; }
+.qt-add-close:hover { color:var(--qi-villain-lt) !important; }
+.qt-add-side-row { display:flex; gap:8px; padding:10px 14px; border-bottom:1px solid rgba(200,146,42,.08); }
+.qt-add-side-lbl { display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none; flex:1; padding:6px 10px; border-radius:var(--qi-r); border:1px solid var(--qi-border); background:var(--qi-card-alt); transition:all .15s; font-size:12px; font-weight:700; }
+.qt-add-side-lbl input { display:none; }
+.qt-add-side-lbl:has(input:checked) { border-color:var(--qi-gold-dk); background:var(--qi-gold-faint); }
+.qt-add-side-v { color:var(--qi-villain-lt); }
+.qt-add-side-h { color:var(--qi-hero-lt); }
+.qt-add-list { max-height:240px; overflow-y:auto; padding:6px 8px; display:flex; flex-direction:column; gap:4px; }
+.qt-add-list::-webkit-scrollbar { width:3px; }
+.qt-add-list::-webkit-scrollbar-thumb { background:var(--qi-gold-dk); border-radius:2px; }
+.qt-add-token { display:flex; align-items:center; gap:10px; padding:7px 8px; border-radius:var(--qi-r); cursor:pointer; border:1px solid transparent; transition:all .15s; }
+.qt-add-token:hover { background:var(--qi-gold-faint); border-color:var(--qi-gold-dk); }
+.qt-add-token-img { width:38px; height:38px; border-radius:50%; background-size:cover; background-position:center; background-color:var(--qi-hbg); border:2px solid var(--qi-border-gd); flex-shrink:0; }
+.qt-add-token-name { font-size:12px; font-weight:600; color:var(--qi-text); }
+.qt-add-hint { padding:8px 14px; font-size:10px; color:var(--qi-text-dim); text-align:center; border-top:1px solid rgba(200,146,42,.07); font-style:italic; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   GENERIC — campo de dados customizável
+   ════════════════════════════════════════════════════════════════════════ */
+.qi-sys-opt-generic { flex-direction:column; align-items:flex-start; gap:6px; padding-bottom:12px; }
+.qi-sys-main-row    { display:flex; align-items:center; gap:9px; }
+.qi-generic-dice-input {
+    width        : 90px;
+    background   : rgba(0,0,0,.45) !important;
+    border       : 1px solid var(--qi-gold-dk) !important;
+    border-radius: var(--qi-r);
+    color        : var(--qi-text-head) !important;
+    font-family  : 'Cinzel', serif !important;
+    font-size    : 14px !important;
+    font-weight  : 700 !important;
+    text-align   : center;
+    padding      : 4px 6px;
+    outline      : none;
+    transition   : border-color .15s, box-shadow .15s;
+    letter-spacing: 1.5px;
+    caret-color  : var(--qi-gold);
+}
+.qi-generic-dice-input:focus {
+    border-color: var(--qi-gold) !important;
+    box-shadow  : 0 0 10px var(--qi-gold-glow);
+}
+.qi-generic-dice-input::placeholder { color:rgba(200,146,42,.3); font-weight:400; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   DICE SO NICE — força acima de tudo
+   ════════════════════════════════════════════════════════════════════════ */
+#dice-box, #dice-box canvas, #dice-canvas,
+.dsn-canvas, canvas.dsn-canvas,
+[id^="dice-"], [class^="dsn-"],
+[class*="dice-so-nice"], [id*="dice3d"] {
+    z-index       : 2147483647 !important;
+    position      : fixed !important;
+    pointer-events: none !important;
+}
+
+/* ── Backdrop — escurece o mapa durante rolagem ── */
+#qc-roll-backdrop {
+    position  : fixed;
+    inset     : 0;
+    background: rgba(0,0,0,.6);
+    z-index   : 9099;   /* um abaixo do banner */
+    opacity   : 0;
+    pointer-events: none;
+    transition: opacity .38s ease;
+}
+#qc-roll-backdrop.visible {
+    opacity       : 1;
+    pointer-events: all;
+}
+
+#qc-roll-banner { z-index:9100 !important; }
