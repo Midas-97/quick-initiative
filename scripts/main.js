@@ -640,6 +640,20 @@ const QiBanner = {
         this._ensureTrack();
         this._applyColors();
         this._renderTrack(state);
+        // Restaura posição salva (somente GM)
+        try {
+            const saved = game.user.isGM ? game.settings.get(QI_ID, 'trackerPosition') : null;
+            if (saved) {
+                const pos = JSON.parse(saved);
+                if (pos.left && pos.top) {
+                    this._track.style.left      = pos.left;
+                    this._track.style.top       = pos.top;
+                    this._track.style.bottom    = 'auto';
+                    this._track.style.right     = 'auto';
+                    this._track.style.transform = 'none';
+                }
+            }
+        } catch(e) {}
         requestAnimationFrame(() => this._track.classList.add('visible'));
     },
 
@@ -805,7 +819,9 @@ const QiBanner = {
                     <button class="qt-nav qt-nav-end"  title="${qi18n('QI.Tracker.EndCombat')}"><i class="fas fa-times"></i></button>
                     <button class="qt-nav qt-nav-prev" title="${qi18n('QI.Tracker.PrevTurn')}"><i class="fas fa-chevron-left"></i></button>
                     <button class="qt-nav qt-nav-next" title="${qi18n('QI.Tracker.NextTurn')}"><i class="fas fa-chevron-right"></i></button>
-                </div>` : ''}
+                </div>` : `<div class="qt-dock-btn-col">
+                    <button class="qt-lock-btn" title="${qi18n('QI.Tracker.LockHint')}"><i class="fas fa-lock"></i></button>
+                </div>`}
             </div>`;
 
         // Restaura posição e estado de unlock
@@ -869,8 +885,12 @@ const QiBanner = {
                     const dx = ev.clientX - _sx, dy = ev.clientY - _sy;
                     if (Math.abs(dx) + Math.abs(dy) > 3) _dragged = true;
                     if (!_dragged) return;
-                    this._track.style.left      = (_ex + dx) + 'px';
-                    this._track.style.top       = (_ey + dy) + 'px';
+                    const tw = this._track.offsetWidth;
+                    const th = this._track.offsetHeight;
+                    const newLeft = Math.max(0, Math.min(window.innerWidth  - tw, _ex + dx));
+                    const newTop  = Math.max(0, Math.min(window.innerHeight - th, _ey + dy));
+                    this._track.style.left      = newLeft + 'px';
+                    this._track.style.top       = newTop  + 'px';
                     this._track.style.bottom    = 'auto';
                     this._track.style.right     = 'auto';
                     this._track.style.transform = 'none';
@@ -880,6 +900,16 @@ const QiBanner = {
                     document.removeEventListener('mousemove', onMove);
                     document.removeEventListener('mouseup', onUp);
                     updateDock();
+                    // Salva posição para o GM
+                    if (game.user.isGM) {
+                        try {
+                            game.settings.set(QI_ID, 'trackerPosition', JSON.stringify({
+                                left     : this._track.style.left,
+                                top      : this._track.style.top,
+                                unlocked : true
+                            }));
+                        } catch(e) {}
+                    }
                 };
                 document.addEventListener('mousemove', onMove);
                 document.addEventListener('mouseup', onUp);
@@ -1348,6 +1378,14 @@ class QuickInitiative {
             },
             default : 'medium',
             onChange: () => QiBanner._applyTrackerSize()
+        });
+
+        // ── Posição salva do tracker (por usuário) ───────────────────────
+        game.settings.register(QI_ID, 'trackerPosition', {
+            scope  : 'client',
+            config : false,
+            type   : String,
+            default: ''
         });
 
         // ── Controle de janela de boas-vindas (exibe uma vez por mundo) ──
