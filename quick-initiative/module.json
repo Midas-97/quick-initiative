@@ -20,6 +20,6 @@
     { "lang": "pt-BR", "name": "Português (Brasil)", "path": "languages/pt-BR.json" }
   ],
   "url": "https://www.patreon.com/cw/Midas316",
-  "manifest": "https://raw.githubusercontent.com/Midas-97/quick-initiative/main/module.json",
+  "manifest": "https://raw.githubusercontent.com/Midas-97/quick-initiative/module.json",
   "download": "https://github.com/Midas-97/quick-initiative/releases/latest/download/quick-initiative.zip"
 }
